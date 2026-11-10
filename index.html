@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAMAMED LIFE | 山口大学医学部生のための総合情報プラットフォーム</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+            color: #243247;
+            background: #f7f9fc;
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            height: 65px;
+            background: rgba(25, 75, 125, 0.95);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: white;
+        }
+
+        .logo span {
+            color: #73c2d6;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0edf3;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .hero {
+            height: 55vh;
+            min-height: 380px;
+            background: linear-gradient(rgba(30, 90, 140, 0.45), rgba(20, 60, 100, 0.7)), 
+                        url('image_c35378.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+            position: relative;
+        }
+
+        .hero-badge {
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            color: #d1f1f7;
+            margin-bottom: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid rgba(209, 241, 247, 0.5);
+            padding: 3px 12px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.15);
+        }
+
+        .hero h1 {
+            font-size: clamp(24px, 4vw, 44px);
+            line-height: 1.3;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            color: #f0f7fa;
+            font-size: clamp(13px, 1.5vw, 15px);
+            max-width: 650px;
+            margin-bottom: 25px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .hero-btn {
+            background: #ffffff;
+            color: #1a5280;
+            padding: 10px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero-btn:hover {
+            background: #e1f3f7;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #173c67;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            margin-top: 5px;
+        }
+
+        .section-header span {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #39869b;
+            font-weight: bold;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(30,60,90,0.06);
+            transition: 0.3s;
+            border: 1px solid #e9edf1;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(30,60,90,0.12);
+        }
+
+        .card-icon-area {
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            position: relative;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 12px;
+            left: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #555;
+            background: rgba(255,255,255,0.7);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .bg-study { background: #e5f0fa; }
+        .bg-club { background: #e5f3ef; }
+        .bg-campus { background: #f9f1df; }
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-body h3 {
+            color: #173c67;
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .card-body p {
+            color: #7d8997;
+            font-size: 13.5px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .card-link {
+            color: #39869b;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .news-section {
+            background: white;
+            padding: 60px 10%;
+            margin-top: 50px;
+            border-top: 1px solid #e9edf1;
+        }
+
+        .news-list {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #f0f3f6;
+            font-size: 14px;
+        }
+
+        .news-date {
+            color: #8293a3;
+            font-size: 13px;
+        }
+
+        .news-cat {
+            background: #e5f0fa;
+            color: #34799b;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #173c67;
+            color: white;
+            padding: 40px 10% 25px;
+            text-align: center;
+        }
+
+        footer .logo {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #b9c9d8;
+            font-size: 12px;
+        }
+
+        .copyright {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0 4%;
+            }
+            nav {
+                display: none;
+            }
+            .hero {
+                height: 45vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">YAMA<span>MED</span> LIFE</a>
+        <nav>
+            <a href="#contents">コンテンツ</a>
+            <a href="#news">お知らせ</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-badge">Yamaguchi University School of Medicine</div>
+        <h1>山口大学医学部生<br>総合情報プラットフォーム</h1>
+        <p>勉強、部活、キャンパスライフ。毎日の学生生活をより豊かに。</p>
+        <a href="#contents" class="hero-btn">コンテンツを見る ↓</a>
+    </div>
+
+    <div class="container" id="contents">
+        <div class="section-header">
+            <span>CONTENTS</span>
+            <h2>カテゴリー一覧</h2>
+        </div>
+
+        <div class="card-grid">
+            <a href="study.html" class="card">
+                <div class="card-icon-area bg-study">
+                    <span class="card-number">01</span>
+                    📚
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3>学び・カリキュラム</h3>
+                        <p>学年ごとの学習内容、講義・試験、臨床実習など。医学科・保健学科の学びを紹介。</p>
+                    </div>
+                    <span class="card-link">詳しく見る →</span>
+                </div>
+            </a>
+
+            <a href="club.html" class="card">
+                <div class="card-icon-area bg-club">
+                    <span class="card-number">02</span>
+                    🏆
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3>部活動・サークル</h3>
+                        <p>体育系・文化系の部活動やサークル紹介。</p>
+                    </div>
+                    <span class="card-link">詳しく見る →</span>
+                </div>
+            </a>
+
+            <a href="#" class="card">
+                <div class="card-icon-area bg-campus">
+                    <span class="card-number">03</span>
+                    🏫
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3>キャンパスライフ</h3>
+                        <p>大学周辺の飲食店や居酒屋、学生に人気のアルバイト先など、日々の生活に役立つ情報。</p>
+                    </div>
+                    <span class="card-link">詳しく見る →</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <section class="news-section" id="news">
+        <div class="section-header">
+            <span>INFORMATION</span>
+            <h2>お知らせ・更新情報</h2>
+        </div>
+        <div class="news-list">
+            <div class="news-item">
+                <span class="news-date">2026.11.08</span>
+                <span class="news-cat">NEW</span>
+                <span class="news-text">YAMAMED LIFE のサイトデザインをリニューアルしました！</span>
+            </div>
+            <div class="news-item">
+                <span class="news-date">COMING</span>
+                <span class="news-cat">準備中</span>
+                <span class="news-text">各カテゴリーの詳細ページを順次公開予定です。</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">YAMA<span>MED</span> LIFE</div>
+        <p>山口大学医学部の学生生活を、もっと便利に、もっと楽しく。</p>
+        <div class="copyright">
+            <p>© 2026 YAMAMED LIFE. All Rights Reserved.</p>
+            <p>※本サイトは学生による非公式の情報サイトです。山口大学とは独立して運営しています。</p>
+        </div>
+    </footer>
+
+</body>
+</html>
